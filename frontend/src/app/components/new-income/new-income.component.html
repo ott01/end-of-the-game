@@ -21,10 +21,17 @@
       Provide Your currency
     </mat-radio-button>
   </mat-radio-group>
+  // TODO: make this dynamic
   <mat-form-field>
     <mat-label>Your currency</mat-label>
     <input matInput placeholder="Provide currency" value="EUR">
   </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Amount</mat-label>
+    <input  matInput matNativeControl="number" placeholder="Provide amount" value="0">
+  </mat-form-field>
+
 
 
   <button type="submit" mat-raised-button color="primary">Create new income</button>
