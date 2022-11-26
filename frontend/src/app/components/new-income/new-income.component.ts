@@ -17,6 +17,13 @@ export class NewIncomeComponent implements OnInit {
     {displayedValue: 'Other', value: 'OTHER'}
   ]
 
+  currencies=[
+    'EUR',
+    'CAN',
+    'USD',
+    'GBP'
+  ]
+
   constructor() { }
 
   ngOnInit(): void {
