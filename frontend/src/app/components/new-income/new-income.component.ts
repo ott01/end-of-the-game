@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
+import {Income} from "../../models/income";
+import {IncomeService} from "../../services/income-service/income.service";
 
 @Component({
   selector: 'app-new-income',
@@ -24,12 +27,41 @@ export class NewIncomeComponent implements OnInit {
     'GBP'
   ]
 
-  constructor() { }
+  incomeForm = new FormGroup({
+    category:new FormControl<string>('SALARY'),
+    currency:new FormControl<string>('EUR'),
+    amount:new FormControl<number>(100),
+    person:new FormControl<string>(''),
+    timestamp:new FormControl<Date>(new Date())
+  })
+
+  constructor(private incomeService: IncomeService) {
+
+  }
 
   ngOnInit(): void {
   }
 
   onSubmitData() {
     console.log("sending data to backend")
+    console.log("form value: "+ JSON.stringify(this.incomeForm.value, null, 2))
+    const income =this.createIncomeBasedOnFormValues()
+    console.log("sending data to backend" + JSON.stringify(income,null,2))
+    this.incomeService.createNewIncome(income).subscribe()
   }
+
+  private createIncomeBasedOnFormValues(): Income{
+    return {
+      creationTimestamp: null,
+      id: null,
+      updateTimestamp: null,
+      category: this.incomeForm.value.category|| 'SALARY',
+      currency: this.incomeForm.value.currency|| 'EUR',
+      amount: this.incomeForm.value.amount|| 0,
+      person: this.incomeForm.value.person|| '',
+      timestamp: this.incomeForm.value.timestamp?.toISOString()|| new Date().toISOString()
+
+    }
+
+}
 }
