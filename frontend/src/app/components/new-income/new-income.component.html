@@ -14,17 +14,17 @@
   <mat-radio-group
     aria-labelledby="radio-group-label"
     class="radio-group"
-  [formControl]="incomeForm.controls.currency" >
+    [formControl]="incomeForm.controls.currency">
     <mat-radio-button class="radio-button" *ngFor="let currency of currencies" [value]="currency">
       {{currency}}
     </mat-radio-button>
-    <mat-radio-button class="radio-button" [value]="">
+    <mat-radio-button class="radio-button" [value]="customCurrency.value">
       Provide Your currency
     </mat-radio-button>
   </mat-radio-group>
   <mat-form-field>
     <mat-label>Your currency</mat-label>
-    <input matInput placeholder="Provide currency" value="EUR">
+    <input #customCurrency matInput placeholder="Provide currency" value="EUR">
   </mat-form-field>
 
   <mat-form-field>
